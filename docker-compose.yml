@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  suno-automation:
+    build: .
+    container_name: suno-automation
+    volumes:
+      # Mount input/output directories for easy access
+      - ./input:/app/input
+      - ./output:/app/output
+      - ./logs:/app/logs
+    environment:
+      - NODE_ENV=development
+      - HEADLESS=true
+    restart: unless-stopped
+    # Remove this line in production for security
+    network_mode: host
