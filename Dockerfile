@@ -27,10 +27,9 @@ COPY package*.json ./
 # Install Node.js dependencies
 RUN npm install
 
-# Install Playwright browsers - THIS IS THE KEY FIX
-# Install system deps as root, then browsers for all users
-RUN npx playwright install-deps chromium
-RUN npx playwright install chromium --with-deps
+# Install Playwright browsers and their dependencies.
+# This is the recommended way to do it.
+RUN npx playwright install --with-deps
 
 # Create user AFTER Playwright installation
 RUN groupadd -r automation && useradd -r -g automation automation
